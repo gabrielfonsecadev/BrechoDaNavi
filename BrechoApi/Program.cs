@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
         policy.WithOrigins(allowedOrigins)
-              .WithOrigins("https://brechodanavi.netlify.app") // Garante o Netlify em produção
+              .WithOrigins("https://brechodanavi-spa.onrender.com") // Garante o Netlify em produção
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
