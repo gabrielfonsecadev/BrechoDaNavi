@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CartService, Produto } from '../services/cart.service';
+import { API_URL } from '../../enviroment';
 
 @Component({
   selector: 'app-product-detail',
@@ -30,7 +31,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   loadProduct(id: string): void {
-    this.http.get<Produto>(`http://localhost:5000/products/${id}`).subscribe({
+    this.http.get<Produto>(`${API_URL}/products/${id}`).subscribe({
       next: (data) => {
         this.product = data;
         this.selectedImage = data.images[0];

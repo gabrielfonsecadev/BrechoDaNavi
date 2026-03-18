@@ -1,0 +1,8 @@
+.env
+.git
+.vscode
+bin
+obj
+Dockerfile
+node_modules
+[Bb]uild/

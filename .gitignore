@@ -7,8 +7,9 @@ node_modules/
 SPA/node_modules/
 
 # Sensitive configuration
-BrechoApi/appsettings.json
-BrechoApi/appsettings.Development.json
+BrechoApi/.env
+BrechoApi/.env.*
+# appsettings.Development.json # Optional: ignore if you want to keep local overrides secret
 
 # User-specific files
 .idea/

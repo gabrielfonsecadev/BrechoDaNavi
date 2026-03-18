@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_URL } from '../../enviroment';
 
 export interface Product {
     id: string;
@@ -15,7 +16,7 @@ export type ProductPayload = Omit<Product, 'id' | 'createdAt' | 'images'>;
 
 @Injectable({ providedIn: 'root' })
 export class ProductAdminService {
-    private readonly baseUrl = 'http://localhost:5000';
+    private readonly baseUrl = API_URL;
 
     constructor(private http: HttpClient) { }
 
