@@ -1,0 +1,23 @@
+# Build artifacts
+BrechoApi/bin/
+BrechoApi/obj/
+SPA/dist/
+SPA/.angular/
+node_modules/
+SPA/node_modules/
+
+# Sensitive configuration
+BrechoApi/appsettings.json
+BrechoApi/appsettings.Development.json
+
+# User-specific files
+.idea/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.doccache
+
+# OS files
+.DS_Store
+Thumbs.db

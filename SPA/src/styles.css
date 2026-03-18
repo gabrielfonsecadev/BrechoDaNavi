@@ -1,0 +1,57 @@
+/* Global Design System - Thrift Shop Aesthetic */
+:root {
+  --bg-color: #FDFBF7;
+  --primary-color: #d81b60; /* Brand Pink */
+  --primary-dark: #ad144d;
+  --accent-color: #5E6B5A; /* Sage Green */
+  --text-main: #2C2C2C;
+  --text-muted: #5A5A5A;
+  --surface: #FFFFFF;
+  --border: #E8E2D9;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --shadow-soft: 0 4px 20px rgba(216, 27, 96, 0.08); /* Updated shadow with pink tint */
+}
+
+html, body { 
+  height: 100%; 
+  background-color: var(--bg-color);
+}
+
+body { 
+  margin: 0; 
+  font-family: var(--font-sans); 
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .serif {
+  font-family: var(--font-serif);
+}
+input {
+  margin-left: 15px;
+}
+
+textarea {
+  margin-left: 15px !important;
+}
+
+.snackbar-success {
+  --mdc-snackbar-container-color: var(--primary-color);
+  --mdc-snackbar-supporting-text-color: white;
+  --mat-snack-bar-button-color: white;
+}
+
+.admin-dialog .mdc-dialog__surface {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border);
+}
+
+/* Tooltip Customization */
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  background-color: var(--text-main) !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  padding: 8px 12px !important;
+}

@@ -1,0 +1,65 @@
+<!-- Seção Hero -->
+<section id="hero">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h2>Encontre sua próxima peça favorita</h2>
+    </div>
+  </div>
+</section>
+
+<!-- Seção Produtos (Grid) -->
+<section id="produtos" class="container section-padding">
+  <h2 class="section-title">Destaques da Coleção</h2>
+  <div class="produtos-grid">
+    <div class="produto-card" *ngFor="let produto of produtos">
+      <div class="img-container" [routerLink]="['/product', produto.id]" style="cursor: pointer;">
+        <img
+          [src]="produto.images && produto.images.length > 0 ? produto.images[0] : '/assets/produtos/placeholder.jpg'"
+          [alt]="produto.name">
+      </div>
+      <div class="card-body">
+        <h3 [routerLink]="['/product', produto.id]" style="cursor: pointer;">{{ produto.name }}</h3>
+        <p class="price">R$ {{ produto.price | number: '1.2-2' }}</p>
+        <button class="btn-buy" [disabled]="estaNoCarrinho(produto.id)" (click)="adicionarAoCarrinho(produto)">
+          {{ estaNoCarrinho(produto.id) ? 'Na Sacola' : 'Adicionar à Sacola' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Seção Sobre -->
+<section id="sobre" class="section-gray section-padding">
+  <div class="container">
+    <h2 class="section-title">Nossa História</h2>
+    <div class="sobre-content">
+      <p>
+        O Brechó da Navi nasceu do amor pela moda e pela sustentabilidade. Acreditamos que cada peça tem uma
+        história para
+        contar e merece uma segunda chance.
+      </p>
+      <p>
+        Nossa curadoria é feita com carinho, selecionando itens que unem qualidade, estilo e consciência ambiental.
+        Ao comprar
+        conosco, você contribui para um ciclo de consumo mais responsável e autêntico.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Seção Contato -->
+<section id="contato" class="container section-padding">
+  <h2 class="section-title">Fale Conosco</h2>
+  <div class="contact-cards">
+    <div class="card-contact">
+      <h3>Email</h3>
+      <p><a href="mailto:contato@brechodanavi.com">contato&#64;brechodanavi.com</a></p>
+    </div>
+    <div class="card-contact">
+      <h3>Redes Sociais</h3>
+      <a href="https://www.instagram.com/brechodanavii/" target="_blank" class="btn-instagram">
+        Siga no Instagram
+      </a>
+    </div>
+  </div>
+</section>

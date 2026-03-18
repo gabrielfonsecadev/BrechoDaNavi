@@ -1,0 +1,27 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <div class="logo-area">
+      <span class="logo-icon">🛍️</span>
+      <h1>Brechó da Navi</h1>
+      <p class="subtitle">Painel Administrativo</p>
+    </div>
+
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha de Acesso</mat-label>
+        <input matInput [(ngModel)]="apiKey" [type]="hideKey ? 'password' : 'text'"
+          placeholder="Informe sua senha de acesso" (keyup.enter)="entrar()" id="api-key-input" />
+        <button mat-icon-button matSuffix (click)="hideKey = !hideKey">
+          <mat-icon>{{ hideKey ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-flat-button class="btn-entrar" (click)="entrar()" id="btn-entrar">
+        <mat-icon>login</mat-icon>
+        Entrar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,47 @@
+<!-- Storefront view -->
+<ng-container *ngIf="!isAdminRoute">
+  <!-- Header Fixo -->
+  <header [class.header-hidden]="!isHeaderVisible">
+    <div class="container header-content">
+      <div class="logo-container">
+        <h1 routerLink="/" style="cursor: pointer;">Brechó da Navi</h1>
+      </div>
+      <nav>
+        <a routerLink="/" fragment="hero">Início</a>
+        <a routerLink="/" fragment="produtos">Loja</a>
+        <a routerLink="/" fragment="sobre">Sobre</a>
+        <a routerLink="/" fragment="contato">Contato</a>
+        <div class="cart-container-mobile">
+          <div class="cart-icon" (click)="toggleCarrinho()">
+            🛒 <span class="badge" *ngIf="carrinho.length > 0">{{ carrinho.length }}</span>
+          </div>
+          <app-carrinho *ngIf="carrinhoAberto" (close)="toggleCarrinho()"></app-carrinho>
+        </div>
+      </nav>
+      <div class="cart-container-desktop">
+        <div class="cart-icon" (click)="toggleCarrinho()">
+          🛒 <span class="badge" *ngIf="carrinho.length > 0">{{ carrinho.length }}</span>
+        </div>
+        <app-carrinho *ngIf="carrinhoAberto" (close)="toggleCarrinho()"></app-carrinho>
+      </div>
+    </div>
+  </header>
+
+  <!-- Backdrop para fechar o carrinho ao clicar fora -->
+  <div class="cart-backdrop" *ngIf="carrinhoAberto" (click)="toggleCarrinho()"></div>
+
+  <!-- Conteúdo principal -->
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2025 Brechó da Navi. Moda com consciência.</p>
+    </div>
+  </footer>
+</ng-container>
+
+<!-- Admin Panel router outlet -->
+<router-outlet *ngIf="isAdminRoute"></router-outlet>

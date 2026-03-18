@@ -1,0 +1,55 @@
+<div class="product-page-container container section-padding">
+  <div *ngIf="loading" class="loading-state">
+    <p>Carregando produto...</p>
+  </div>
+
+  <div *ngIf="!loading && !product" class="error-state">
+    <p>Produto não encontrado.</p>
+    <a routerLink="/" class="cta-button">Voltar para a Loja</a>
+  </div>
+
+  <div *ngIf="!loading && product" class="product-grid">
+    <!-- Galeria de Imagens -->
+    <div class="product-gallery">
+      <div class="main-image-container">
+        <img [src]="selectedImage" [alt]="product.name" class="main-image">
+      </div>
+      <div class="thumbnails-grid" *ngIf="product.images.length > 1">
+        <div *ngFor="let img of product.images" (click)="selectImage(img)" [class.active]="selectedImage === img"
+          class="thumbnail-container">
+          <img [src]="img" [alt]="product.name">
+        </div>
+      </div>
+    </div>
+
+    <!-- Informações do Produto -->
+    <div class="product-info">
+      <nav class="breadcrumb">
+        <a routerLink="/">Loja</a> / <span>{{ product.name }}</span>
+      </nav>
+
+      <h1 class="product-name">{{ product.name }}</h1>
+      <p class="product-price">R$ {{ product.price | number:'1.2-2' }}</p>
+
+      <div class="product-description">
+        <h3>Descrição</h3>
+        <p>{{ product.description }}</p>
+      </div>
+
+      <div class="purchase-actions">
+        <button class="add-to-cart-btn" (click)="adicionarAoCarrinho()" [disabled]="product.isSold">
+          Adicionar à Sacola
+        </button>
+        <button class="whatsapp-btn" (click)="buyViaWhatsApp()" [disabled]="product.isSold">
+          <span class="icon">💬</span>
+          {{ product.isSold ? 'Vendido' : 'Comprar via WhatsApp' }}
+        </button>
+      </div>
+
+      <div class="product-meta">
+        <p *ngIf="product.isSold" class="sold-tag">Indisponível</p>
+        <p class="shipping-info">Envio para todo o Brasil 📦</p>
+      </div>
+    </div>
+  </div>
+</div>

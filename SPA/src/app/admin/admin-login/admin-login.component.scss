@@ -1,0 +1,88 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #50334a 0%, #4a1645 50%, #590f60 100%);
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+  padding: 2rem;
+
+  .logo-area {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .logo-icon {
+      font-size: 3.5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      margin: 0.25rem 0 0;
+    }
+  }
+
+  .full-width {
+    width: 100%;
+
+    ::ng-deep {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing { border-color: rgba(255,255,255,0.2) !important; }
+      label { color: rgba(255,255,255,0.6) !important; }
+      input { color: #fff !important; }
+      .mat-mdc-form-field-icon-suffix button { color: rgba(255,255,255,0.6); }
+      input::placeholder { color: #a0a0a0 !important; }
+    }
+  }
+
+  mat-card-actions {
+    padding: 0;
+    margin-top: 1rem;
+
+    .btn-entrar {
+      width: 100%;
+      height: 48px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e94560, #c2185b);
+      color: #fff;
+      gap: 0.5rem;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s, box-shadow 0.2s;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<div class="cart-dialog-container">
+  <div class="header-cart">
+    <h2 class="dialog-title">Sacola</h2>
+    <span class="btn-close-cart" (click)="close.emit()" title="Fechar sacola">×</span>
+  </div>
+
+  <div *ngIf="carrinho.length === 0" class="empty-cart">
+    <p>Sua sacola está vazia.</p>
+  </div>
+
+  <div *ngIf="carrinho.length > 0" class="cart-content">
+    <div class="cart-items-list">
+      <div class="cart-item" *ngFor="let item of carrinho; let i = index">
+        <img [src]="item.images && item.images.length > 0 ? item.images[0] : '/assets/produtos/placeholder.jpg'"
+          [alt]="item.name" class="item-thumb">
+        <div class="item-details">
+          <div class="item-header">
+            <h4 class="item-name">{{ item.name }}</h4>
+            <button class="btn-remove" (click)="removerItem(i)" title="Remover item">×</button>
+          </div>
+          <p class="item-price">R$ {{ item.price | number:'1.2-2' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="total-row">
+        <strong>Total:</strong>
+        <span class="total-price">R$ {{ total | number:'1.2-2' }}</span>
+      </div>
+      <button class="btn-checkout" (click)="finalizarCompra()">Finalizar no WhatsApp</button>
+    </div>
+  </div>
+</div>

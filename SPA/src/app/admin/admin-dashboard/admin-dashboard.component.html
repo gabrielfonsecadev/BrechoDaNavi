@@ -1,0 +1,101 @@
+<div class="dashboard">
+    <!-- Header -->
+    <header class="dash-header">
+        <div class="header-left">
+            <span class="logo">🛍️</span>
+            <div>
+                <h1>Brechó da Navi</h1>
+                <span class="subtitle">Painel Admin</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <button mat-button class="btn-ver-loja" routerLink="/">
+                <mat-icon>storefront</mat-icon> Voltar para a loja
+            </button>
+            <button mat-stroked-button class="btn-novo" (click)="openCreate()" id="btn-novo-produto">
+                <mat-icon>add</mat-icon> Novo Produto
+            </button>
+            <button mat-icon-button (click)="sair()" matTooltip="Sair" id="btn-sair">
+                <mat-icon>logout</mat-icon>
+            </button>
+        </div>
+    </header>
+
+    <!-- Conteúdo -->
+    <main class="dash-content">
+        <!-- Loading -->
+        @if (loading()) {
+        <div class="loading-wrap">
+            <mat-spinner diameter="48"></mat-spinner>
+            <p>Carregando produtos...</p>
+        </div>
+        }
+
+        <!-- Tabela -->
+        @if (!loading()) {
+        @if (products().length === 0) {
+        <div class="empty-state">
+            <mat-icon class="empty-icon">inventory_2</mat-icon>
+            <h2>Nenhum produto cadastrado</h2>
+            <p>Clique em <strong>Novo Produto</strong> para começar.</p>
+        </div>
+        } @else {
+        <div class="table-wrap">
+            <table mat-table [dataSource]="products()" class="products-table">
+
+                <!-- Name -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>Produto</th>
+                    <td mat-cell *matCellDef="let p">
+                        <div class="product-name">{{ p.name }}</div>
+                        <div class="product-desc">{{ p.description }}</div>
+                    </td>
+                </ng-container>
+
+                <!-- Price -->
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef>Preço</th>
+                    <td mat-cell *matCellDef="let p">
+                        <span class="price-badge">{{ p.price | currency:'BRL' }}</span>
+                    </td>
+                </ng-container>
+
+                <!-- Images -->
+                <ng-container matColumnDef="images">
+                    <th mat-header-cell *matHeaderCellDef>Imagens</th>
+                    <td mat-cell *matCellDef="let p">
+                        <span class="img-count">
+                            <mat-icon inline>photo_library</mat-icon>
+                            {{ p.images?.length ?? 0 }}
+                        </span>
+                    </td>
+                </ng-container>
+
+                <!-- CreatedAt -->
+                <ng-container matColumnDef="createdAt">
+                    <th mat-header-cell *matHeaderCellDef>Criado em</th>
+                    <td mat-cell *matCellDef="let p">{{ p.createdAt | date:'dd/MM/yyyy' }}</td>
+                </ng-container>
+
+                <!-- Actions -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Ações</th>
+                    <td mat-cell *matCellDef="let p">
+                        <button mat-icon-button matTooltip="Editar" (click)="openEdit(p)" [id]="'btn-edit-' + p.id">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Excluir" class="btn-delete" (click)="confirmDelete(p)"
+                            [id]="'btn-delete-' + p.id">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        }
+        }
+    </main>
+</div>
