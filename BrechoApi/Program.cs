@@ -3,29 +3,33 @@ using BrechoApi.Endpoints;
 using BrechoApi.Middleware;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Carregar .env se existir
+// Carregar .env se existir ANTES de criar o builder
 var dotEnv = Path.Combine(Directory.GetCurrentDirectory(), ".env");
 if (File.Exists(dotEnv))
 {
     foreach (var line in File.ReadAllLines(dotEnv))
     {
-        var parts = line.Split('=', 2, StringSplitOptions.RemoveEmptyEntries);
+        var trimmedLine = line.Trim();
+        if (string.IsNullOrWhiteSpace(trimmedLine) || trimmedLine.StartsWith("#")) continue;
+
+        var parts = trimmedLine.Split('=', 2, StringSplitOptions.RemoveEmptyEntries);
         if (parts.Length == 2) Environment.SetEnvironmentVariable(parts[0].Trim(), parts[1].Trim().Trim('"'));
     }
 }
+
+var builder = WebApplication.CreateBuilder(args);
 
 // EF Core + PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// CORS — permite requisições do Angular em desenvolvimento
+// CORS — permite requisições do Angular e do Netlify (Produção)
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
         policy.WithOrigins(allowedOrigins)
+              .WithOrigins("https://brechodanavi.netlify.app") // Garante o Netlify em produção
               .AllowAnyHeader()
               .AllowAnyMethod());
 });
