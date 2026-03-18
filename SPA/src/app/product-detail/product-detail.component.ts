@@ -56,7 +56,7 @@ export class ProductDetailComponent implements OnInit {
 
   buyViaWhatsApp(): void {
     if (!this.product) return;
-    const numeroWhatsApp = '5511999999999'; // Substitua pelo número real da loja
+    const numeroWhatsApp = '5531995295031'; // Substitua pelo número real da loja
     const mensagem = `Olá! Tenho interesse no produto: ${this.product.name} (R$ ${this.product.price.toFixed(2)}).`;
     const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, '_blank');
